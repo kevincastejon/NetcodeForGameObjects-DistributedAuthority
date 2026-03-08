@@ -2,30 +2,28 @@ using Caskev.NetcodeForGameObjects.DistributedAuthority;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkTransform_3D
 {
     public class CameraPlayer : NetworkBehaviour
     {
-        [SerializeField] private InputAction _mouseDeltaInput;
-        [SerializeField] private InputAction _mouseClickInput;
+        [SerializeField] private InputAction _lookInput;
+        [SerializeField] private InputAction _grabInput;
         [SerializeField] private InputAction _moveInput;
         [SerializeField] private InputAction _moveUpInput;
         [SerializeField] private InputAction _moveDownInput;
         [SerializeField] private InputAction _sprintInput;
         [SerializeField] private InputAction _escapeInput;
-        [Tooltip("Throw rigidbodies on release")]
-        [SerializeField] private bool _throwOnRelease;
         [SerializeField] private Transform _grabPoint;
         private Camera _camera;
         public float acceleration = 50; // how fast you accelerate
         public float accSprintMultiplier = 4; // how much faster you go when "sprinting"
-        public float lookSensitivity = 1; // mouse look sensitivity
+        public float lookSensitivity = 0.1f; // mouse look sensitivity
         public float dampingCoefficient = 5; // how quickly you break to a halt after you stop your input
         public bool focusOnEnable = true; // whether or not to focus and lock cursor immediately on enable
 
         private DistributedNetworkTransform _draggedObject;
-        private DistributedNetworkRigidbody _draggedPhysicsObject;
 
         private Vector3 _lastPosition;
         private Vector3 _kinematicVelocity;
@@ -49,8 +47,8 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedN
         }
         private void OnEnable()
         {
-            _mouseDeltaInput.Enable();
-            _mouseClickInput.Enable();
+            _lookInput.Enable();
+            _grabInput.Enable();
             _moveInput.Enable();
             _moveUpInput.Enable();
             _moveDownInput.Enable();
@@ -60,8 +58,8 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedN
         }
         private void OnDisable()
         {
-            _mouseDeltaInput.Disable();
-            _mouseClickInput.Disable();
+            _lookInput.Disable();
+            _grabInput.Disable();
             _moveInput.Disable();
             _moveUpInput.Disable();
             _moveDownInput.Disable();
@@ -69,27 +67,12 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedN
             _escapeInput.Disable();
             Focused = false;
         }
-
-        private void FixedUpdate()
-        {
-            if (_draggedPhysicsObject)
-            {
-                if (!_draggedPhysicsObject.Rigidbody.isKinematic)
-                {
-                    _draggedPhysicsObject.Rigidbody.isKinematic = true;
-                }
-                _draggedPhysicsObject.Rigidbody.MovePosition(_grabPoint.position);
-                _draggedPhysicsObject.Rigidbody.MoveRotation(_grabPoint.rotation);
-                _kinematicVelocity = (_draggedPhysicsObject.Rigidbody.position - _lastPosition) / Time.fixedDeltaTime;
-                _lastPosition = _draggedPhysicsObject.Rigidbody.position;
-            }
-        }
         private void Update()
         {
             // Input
             if (Focused)
                 UpdateInput();
-            else if (_mouseClickInput.WasPressedThisFrame())
+            else if (_grabInput.WasPressedThisFrame())
                 Focused = true;
 
             // Physics
@@ -99,7 +82,7 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedN
             // Grabbing & UnGrabbing
             if (_draggedObject)
             {
-                if (!_mouseClickInput.IsPressed())
+                if (!_grabInput.IsPressed())
                 {
                     _draggedObject.DeclineOwnership(CompleteTransformPose.FromTransform(_draggedObject.transform));
                     _draggedObject = null;
@@ -110,21 +93,7 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedN
                     _draggedObject.transform.rotation = _grabPoint.rotation;
                 }
             }
-            else if (_draggedPhysicsObject)
-            {
-                if (!_mouseClickInput.IsPressed())
-                {
-                    if (!_draggedPhysicsObject.OriginalKinematicState || _throwOnRelease)
-                    {
-                        _draggedPhysicsObject.Rigidbody.isKinematic = _draggedPhysicsObject.OriginalKinematicState;
-                        _draggedPhysicsObject.Rigidbody.linearVelocity = _kinematicVelocity;
-                    }
-                    _draggedPhysicsObject.AutomaticallyDeclineOnAsleep = true;
-                    _draggedPhysicsObject.UnlockOwnership();
-                    _draggedPhysicsObject = null;
-                }
-            }
-            else if (_mouseClickInput.WasPressedThisFrame())
+            else if (_grabInput.WasPressedThisFrame())
             {
                 if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 3f))
                 {
@@ -137,19 +106,6 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedN
                             _grabPoint.position = _draggedObject.transform.position;
                             _grabPoint.rotation = _draggedObject.transform.rotation;
                             obj.RequestOwnership();
-                        }
-                    }
-                    else
-                    {
-                        Caskev.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkRigidbody physicsObj = hit.collider.GetComponent<Caskev.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkRigidbody>();
-                        if (physicsObj && (physicsObj.IsOwner || !physicsObj.IsOwnershipLocked))
-                        {
-                            _draggedPhysicsObject = physicsObj;
-                            _draggedPhysicsObject.AutomaticallyDeclineOnAsleep = false;
-                            _grabPoint.position = _draggedPhysicsObject.Rigidbody.position;
-                            _grabPoint.rotation = _draggedPhysicsObject.Rigidbody.rotation;
-                            _draggedPhysicsObject.Rigidbody.isKinematic = true;
-                            physicsObj.RequestOwnership();
                         }
                     }
                 }
@@ -178,7 +134,7 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedN
             velocity += GetAccelerationVector() * Time.deltaTime;
 
             // Rotation
-            Vector2 mouseDelta = _mouseDeltaInput.ReadValue<Vector2>();
+            Vector2 mouseDelta = _lookInput.ReadValue<Vector2>();
             mouseDelta.y *= -1;
             mouseDelta = lookSensitivity * mouseDelta;
             Quaternion rotation = transform.rotation;

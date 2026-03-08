@@ -157,7 +157,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 944cad47801597240b722b527e84b695, type: 2}
+  - {fileID: 2100000, guid: a73a913b232ffd14e9b2211bde9b6b4b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -318,8 +318,8 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkTransformExpanded: 0
   AutoOwnerAuthorityTickOffset: 1
-  PositionInterpolationType: 0
-  RotationInterpolationType: 0
+  PositionInterpolationType: 1
+  RotationInterpolationType: 1
   ScaleInterpolationType: 0
   PositionLerpSmoothing: 1
   PositionMaxInterpolationTime: 0.1
@@ -362,7 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkTransform_3D.CameraPlayer
   ShowTopMostFoldoutHeaderGroup: 1
-  _mouseDeltaInput:
+  _lookInput:
     m_Name: Mouse Delta Input
     m_Type: 0
     m_ExpectedControlType: Vector2
@@ -387,7 +387,7 @@ MonoBehaviour:
       m_Action: Mouse Delta Input
       m_Flags: 0
     m_Flags: 0
-  _mouseClickInput:
+  _grabInput:
     m_Name: Mouse Click Input
     m_Type: 1
     m_ExpectedControlType: Button
@@ -405,7 +405,7 @@ MonoBehaviour:
       m_Flags: 0
     - m_Name: 
       m_Id: 86ab401f-3aee-4747-97b0-8df7b8d689b5
-      m_Path: <Gamepad>/{Submit}
+      m_Path: <Gamepad>/rightTrigger
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -561,7 +561,6 @@ MonoBehaviour:
       m_Action: Escape Input
       m_Flags: 0
     m_Flags: 0
-  _throwOnRelease: 0
   _grabPoint: {fileID: 5950522846028812572}
   acceleration: 50
   accSprintMultiplier: 4

@@ -1,26 +1,30 @@
 using Caskev.NetcodeForGameObjects.DistributedAuthority;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
-namespace Caskev.Samples.NetcodeForGameObjects.DistributedNetworkRigidbody
+namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkRigidbody_3D
 {
     public class CameraPlayer : NetworkBehaviour
     {
-        [Tooltip("Throw rigidbodies on release")]
-        [SerializeField] private bool _throwOnRelease;
+        [SerializeField] private InputAction _lookInput;
+        [SerializeField] private InputAction _grabInput;
+        [SerializeField] private InputAction _moveInput;
+        [SerializeField] private InputAction _moveUpInput;
+        [SerializeField] private InputAction _moveDownInput;
+        [SerializeField] private InputAction _sprintInput;
+        [SerializeField] private InputAction _escapeInput;
         [SerializeField] private Transform _grabPoint;
         private Camera _camera;
         public float acceleration = 50; // how fast you accelerate
         public float accSprintMultiplier = 4; // how much faster you go when "sprinting"
-        public float lookSensitivity = 1; // mouse look sensitivity
+        public float lookSensitivity = 0.1f; // mouse look sensitivity
         public float dampingCoefficient = 5; // how quickly you break to a halt after you stop your input
         public bool focusOnEnable = true; // whether or not to focus and lock cursor immediately on enable
 
-        private DistributedNetworkTransform _draggedObject;
-        private Caskev.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkRigidbody _draggedPhysicsObject;
+        private DistributedNetworkRigidbody _draggedPhysicsObject;
 
-        private Vector3 _lastPosition;
-        private Vector3 _kinematicVelocity;
 
         Vector3 velocity; // current velocity
 
@@ -41,9 +45,27 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedNetworkRigidbody
         }
         private void OnEnable()
         {
+            _lookInput.Enable();
+            _grabInput.Enable();
+            _moveInput.Enable();
+            _moveUpInput.Enable();
+            _moveDownInput.Enable();
+            _sprintInput.Enable();
+            _escapeInput.Enable();
             if (focusOnEnable) Focused = true;
         }
-        private void OnDisable() => Focused = false;
+        private void OnDisable()
+        {
+            _lookInput.Disable();
+            _grabInput.Disable();
+            _moveInput.Disable();
+            _moveUpInput.Disable();
+            _moveDownInput.Disable();
+            _sprintInput.Disable();
+            _escapeInput.Disable();
+            Focused = false;
+        }
+
         private void FixedUpdate()
         {
             if (_draggedPhysicsObject)
@@ -54,8 +76,6 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedNetworkRigidbody
                 }
                 _draggedPhysicsObject.Rigidbody.MovePosition(_grabPoint.position);
                 _draggedPhysicsObject.Rigidbody.MoveRotation(_grabPoint.rotation);
-                _kinematicVelocity = (_draggedPhysicsObject.Rigidbody.position - _lastPosition) / Time.fixedDeltaTime;
-                _lastPosition = _draggedPhysicsObject.Rigidbody.position;
             }
         }
         private void Update()
@@ -63,7 +83,7 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedNetworkRigidbody
             // Input
             if (Focused)
                 UpdateInput();
-            else if (Input.GetMouseButtonDown(0))
+            else if (_grabInput.WasPressedThisFrame())
                 Focused = true;
 
             // Physics
@@ -71,60 +91,29 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedNetworkRigidbody
             transform.position += velocity * Time.deltaTime;
 
             // Grabbing & UnGrabbing
-            if (_draggedObject)
+            if (_draggedPhysicsObject)
             {
-                if (!Input.GetMouseButton(0))
+                if (!_grabInput.IsPressed())
                 {
-                    _draggedObject.DeclineOwnership(CompleteTransformPose.FromTransform(_draggedObject.transform));
-                    _draggedObject = null;
-                }
-                else
-                {
-                    _draggedObject.transform.position = _grabPoint.position;
-                    _draggedObject.transform.rotation = _grabPoint.rotation;
-                }
-            }
-            else if (_draggedPhysicsObject)
-            {
-                if (!Input.GetMouseButton(0))
-                {
-                    if (!_draggedPhysicsObject.OriginalKinematicState || _throwOnRelease)
-                    {
-                        _draggedPhysicsObject.Rigidbody.isKinematic = _draggedPhysicsObject.OriginalKinematicState;
-                        _draggedPhysicsObject.Rigidbody.linearVelocity = _kinematicVelocity;
-                    }
+                    _draggedPhysicsObject.Rigidbody.isKinematic = _draggedPhysicsObject.OriginalKinematicState;
                     _draggedPhysicsObject.AutomaticallyDeclineOnAsleep = true;
                     _draggedPhysicsObject.UnlockOwnership();
                     _draggedPhysicsObject = null;
                 }
             }
-            else if (Input.GetMouseButtonDown(0))
+            else if (_grabInput.WasPressedThisFrame())
             {
-                if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 3f))
+                if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 3f))
                 {
-                    DistributedNetworkTransform obj = hit.collider.GetComponent<DistributedNetworkTransform>();
-                    if (obj)
+                    DistributedNetworkRigidbody physicsObj = hit.collider.GetComponent<DistributedNetworkRigidbody>();
+                    if (physicsObj && (physicsObj.IsOwner || !physicsObj.IsOwnershipLocked))
                     {
-                        if (obj.IsOwner || !obj.IsOwnershipLocked)
-                        {
-                            _draggedObject = obj;
-                            _grabPoint.position = _draggedObject.transform.position;
-                            _grabPoint.rotation = _draggedObject.transform.rotation;
-                            obj.RequestOwnership();
-                        }
-                    }
-                    else
-                    {
-                        Caskev.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkRigidbody physicsObj = hit.collider.GetComponent<Caskev.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkRigidbody>();
-                        if (physicsObj && (physicsObj.IsOwner || !physicsObj.IsOwnershipLocked))
-                        {
-                            _draggedPhysicsObject = physicsObj;
-                            _draggedPhysicsObject.AutomaticallyDeclineOnAsleep = false;
-                            _grabPoint.position = _draggedPhysicsObject.Rigidbody.position;
-                            _grabPoint.rotation = _draggedPhysicsObject.Rigidbody.rotation;
-                            _draggedPhysicsObject.Rigidbody.isKinematic = true;
-                            physicsObj.RequestOwnership();
-                        }
+                        _draggedPhysicsObject = physicsObj;
+                        _draggedPhysicsObject.AutomaticallyDeclineOnAsleep = false;
+                        _grabPoint.position = _draggedPhysicsObject.Rigidbody.position;
+                        _grabPoint.rotation = _draggedPhysicsObject.Rigidbody.rotation;
+                        _draggedPhysicsObject.Rigidbody.isKinematic = true;
+                        physicsObj.RequestOwnership();
                     }
                 }
             }
@@ -152,35 +141,37 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedNetworkRigidbody
             velocity += GetAccelerationVector() * Time.deltaTime;
 
             // Rotation
-            Vector2 mouseDelta = lookSensitivity * new Vector2(Input.GetAxis("Mouse X"), -Input.GetAxis("Mouse Y"));
+            Vector2 mouseDelta = _lookInput.ReadValue<Vector2>();
+            mouseDelta.y *= -1;
+            mouseDelta = lookSensitivity * mouseDelta;
             Quaternion rotation = transform.rotation;
             Quaternion horiz = Quaternion.AngleAxis(mouseDelta.x, Vector3.up);
             Quaternion vert = Quaternion.AngleAxis(mouseDelta.y, Vector3.right);
             transform.rotation = horiz * rotation * vert;
 
             // Leave cursor lock
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (_escapeInput.WasPressedThisFrame())
                 Focused = false;
         }
         private Vector3 GetAccelerationVector()
         {
             Vector3 moveInput = default;
 
-            void AddMovement(KeyCode key, Vector3 dir)
+            void AddMovement(bool inputPressed, Vector3 dir)
             {
-                if (Input.GetKey(key))
+                if (inputPressed)
                     moveInput += dir;
             }
-
-            AddMovement(KeyCode.W, Vector3.forward);
-            AddMovement(KeyCode.S, Vector3.back);
-            AddMovement(KeyCode.D, Vector3.right);
-            AddMovement(KeyCode.A, Vector3.left);
-            AddMovement(KeyCode.Space, Vector3.up);
-            AddMovement(KeyCode.LeftControl, Vector3.down);
+            Vector2 move = _moveInput.ReadValue<Vector2>();
+            AddMovement(move.y > 0f, Vector3.forward);
+            AddMovement(move.y < 0f, Vector3.back);
+            AddMovement(move.x > 0f, Vector3.right);
+            AddMovement(move.x < 0f, Vector3.left);
+            AddMovement(_moveUpInput.IsPressed(), Vector3.up);
+            AddMovement(_moveDownInput.IsPressed(), Vector3.down);
             Vector3 direction = transform.TransformVector(moveInput.normalized);
 
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (_sprintInput.IsPressed())
                 return direction * (acceleration * accSprintMultiplier); // "sprinting"
             return direction * acceleration; // "walking"
         }

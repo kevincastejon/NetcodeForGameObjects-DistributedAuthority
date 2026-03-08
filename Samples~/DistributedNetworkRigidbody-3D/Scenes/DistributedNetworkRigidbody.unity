@@ -426,8 +426,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1238722005}
+        m_TargetAssemblyTypeName: Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedRigidbody.GameManager,
+          Assembly-CSharp
         m_MethodName: Join
         m_Mode: 1
         m_Arguments:
@@ -708,8 +709,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1238722005}
+        m_TargetAssemblyTypeName: Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedRigidbody.GameManager,
+          Assembly-CSharp
         m_MethodName: Host
         m_Mode: 1
         m_Arguments:
@@ -869,7 +871,7 @@ GameObject:
   - component: {fileID: 1142026031}
   - component: {fileID: 1142026041}
   - component: {fileID: 1142026040}
-  - component: {fileID: 1142026039}
+  - component: {fileID: 1142026042}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1023,25 +1025,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1142026039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1142026030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54e56065c503e3d40814995a43dbb38f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _renderer: {fileID: 1142026033}
-  _authorityColor: {r: 0, g: 0.5019608, b: 1, a: 1}
-  _requestingColor: {r: 0, g: 0, b: 0.5019608, a: 1}
-  _remoteColor: {r: 0, g: 1, b: 0.5019608, a: 1}
-  _decliningColor: {r: 0, g: 0.5019608, b: 0, a: 1}
-  _lockedColor: {r: 0, g: 0, b: 0, a: 0}
-  _unlockedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1142026040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1064,8 +1047,9 @@ MonoBehaviour:
     _onEnterAuthority:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1142026039}
-          m_TargetAssemblyTypeName: RendererColorSetter, Assembly-CSharp
+        - m_Target: {fileID: 1142026042}
+          m_TargetAssemblyTypeName: Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkRigidbody_3D.RendererColorSetter,
+            Assembly-CSharp
           m_MethodName: SetAuthorityColor
           m_Mode: 1
           m_Arguments:
@@ -1082,8 +1066,9 @@ MonoBehaviour:
     _onEnterRemote:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1142026039}
-          m_TargetAssemblyTypeName: RendererColorSetter, Assembly-CSharp
+        - m_Target: {fileID: 1142026042}
+          m_TargetAssemblyTypeName: Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkRigidbody_3D.RendererColorSetter,
+            Assembly-CSharp
           m_MethodName: SetRemoteColor
           m_Mode: 1
           m_Arguments:
@@ -1100,8 +1085,9 @@ MonoBehaviour:
     _onEnterRequesting:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1142026039}
-          m_TargetAssemblyTypeName: RendererColorSetter, Assembly-CSharp
+        - m_Target: {fileID: 1142026042}
+          m_TargetAssemblyTypeName: Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkRigidbody_3D.RendererColorSetter,
+            Assembly-CSharp
           m_MethodName: SetRequestingColor
           m_Mode: 1
           m_Arguments:
@@ -1118,8 +1104,9 @@ MonoBehaviour:
     _onEnterDeclining:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1142026039}
-          m_TargetAssemblyTypeName: RendererColorSetter, Assembly-CSharp
+        - m_Target: {fileID: 1142026042}
+          m_TargetAssemblyTypeName: Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkRigidbody_3D.RendererColorSetter,
+            Assembly-CSharp
           m_MethodName: SetDecliningColor
           m_Mode: 1
           m_Arguments:
@@ -1145,8 +1132,9 @@ MonoBehaviour:
         _onOwnershipLocked:
           m_PersistentCalls:
             m_Calls:
-            - m_Target: {fileID: 1733564032}
-              m_TargetAssemblyTypeName: RendererColorSetter, Assembly-CSharp
+            - m_Target: {fileID: 1733564035}
+              m_TargetAssemblyTypeName: Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkRigidbody_3D.RendererColorSetter,
+                Assembly-CSharp
               m_MethodName: SetLockedColor
               m_Mode: 1
               m_Arguments:
@@ -1160,8 +1148,9 @@ MonoBehaviour:
         _onOwnershipUnlocked:
           m_PersistentCalls:
             m_Calls:
-            - m_Target: {fileID: 1733564032}
-              m_TargetAssemblyTypeName: RendererColorSetter, Assembly-CSharp
+            - m_Target: {fileID: 1733564035}
+              m_TargetAssemblyTypeName: Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkRigidbody_3D.RendererColorSetter,
+                Assembly-CSharp
               m_MethodName: SetUnlockedColor
               m_Mode: 1
               m_Arguments:
@@ -1411,8 +1400,8 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkTransformExpanded: 0
   AutoOwnerAuthorityTickOffset: 1
-  PositionInterpolationType: 0
-  RotationInterpolationType: 0
+  PositionInterpolationType: 1
+  RotationInterpolationType: 1
   ScaleInterpolationType: 0
   PositionLerpSmoothing: 1
   PositionMaxInterpolationTime: 0.1
@@ -1442,6 +1431,25 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &1142026042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142026030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd9707b5f02d994da16a5066c9f8ba7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkRigidbody_3D.RendererColorSetter
+  _renderer: {fileID: 1142026033}
+  _authorityColor: {r: 0, g: 0.5019608, b: 1, a: 1}
+  _requestingColor: {r: 0, g: 0, b: 0.5019608, a: 1}
+  _remoteColor: {r: 0, g: 1, b: 0.5019608, a: 1}
+  _decliningColor: {r: 0, g: 0.5019608, b: 0, a: 1}
+  _lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  _unlockedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1238722001
 GameObject:
   m_ObjectHideFlags: 0
@@ -1897,7 +1905,7 @@ GameObject:
   - component: {fileID: 1733564031}
   - component: {fileID: 1733564034}
   - component: {fileID: 1733564033}
-  - component: {fileID: 1733564032}
+  - component: {fileID: 1733564035}
   m_Layer: 0
   m_Name: LockStateFeedback
   m_TagString: Untagged
@@ -1920,25 +1928,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1142026035}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1733564032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1733564030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54e56065c503e3d40814995a43dbb38f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _renderer: {fileID: 1733564033}
-  _authorityColor: {r: 0, g: 0, b: 0, a: 0}
-  _requestingColor: {r: 0, g: 0, b: 0, a: 0}
-  _remoteColor: {r: 0, g: 0, b: 0, a: 0}
-  _decliningColor: {r: 0, g: 0, b: 0, a: 0}
-  _lockedColor: {r: 1, g: 0, b: 0, a: 1}
-  _unlockedColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!23 &1733564033
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1996,6 +1985,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1733564030}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1733564035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733564030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd9707b5f02d994da16a5066c9f8ba7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkRigidbody_3D.RendererColorSetter
+  _renderer: {fileID: 1733564033}
+  _authorityColor: {r: 0, g: 0, b: 0, a: 0}
+  _requestingColor: {r: 0, g: 0, b: 0, a: 0}
+  _remoteColor: {r: 0, g: 0, b: 0, a: 0}
+  _decliningColor: {r: 0, g: 0, b: 0, a: 0}
+  _lockedColor: {r: 1, g: 0, b: 0, a: 1}
+  _unlockedColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1760036118
 GameObject:
   m_ObjectHideFlags: 0
