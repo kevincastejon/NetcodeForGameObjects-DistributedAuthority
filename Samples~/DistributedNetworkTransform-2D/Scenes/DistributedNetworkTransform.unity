@@ -512,8 +512,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1807880254}
+        m_TargetAssemblyTypeName: Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkTransform_2D.GameManager,
+          Assembly-CSharp
         m_MethodName: Host
         m_Mode: 1
         m_Arguments:
@@ -1288,8 +1289,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1807880254}
+        m_TargetAssemblyTypeName: Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkTransform_2D.GameManager,
+          Assembly-CSharp
         m_MethodName: Join
         m_Mode: 1
         m_Arguments:
@@ -2261,8 +2263,9 @@ MonoBehaviour:
     _onEnterAuthority:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: RendererColorSetter, Assembly-CSharp
+        - m_Target: {fileID: 1850087627}
+          m_TargetAssemblyTypeName: Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkTransform_2D.RendererColorSetter,
+            Assembly-CSharp
           m_MethodName: SetAuthorityColor
           m_Mode: 1
           m_Arguments:
@@ -2279,9 +2282,10 @@ MonoBehaviour:
     _onEnterRemote:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: RendererColorSetter, Assembly-CSharp
-          m_MethodName: SetAuthorityColor
+        - m_Target: {fileID: 1850087627}
+          m_TargetAssemblyTypeName: Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkTransform_2D.RendererColorSetter,
+            Assembly-CSharp
+          m_MethodName: SetRemoteColor
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2297,9 +2301,10 @@ MonoBehaviour:
     _onEnterRequesting:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: RendererColorSetter, Assembly-CSharp
-          m_MethodName: SetAuthorityColor
+        - m_Target: {fileID: 1850087627}
+          m_TargetAssemblyTypeName: Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkTransform_2D.RendererColorSetter,
+            Assembly-CSharp
+          m_MethodName: SetRequestingColor
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2315,9 +2320,10 @@ MonoBehaviour:
     _onEnterDeclining:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: RendererColorSetter, Assembly-CSharp
-          m_MethodName: SetAuthorityColor
+        - m_Target: {fileID: 1850087627}
+          m_TargetAssemblyTypeName: Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkTransform_2D.RendererColorSetter,
+            Assembly-CSharp
+          m_MethodName: SetDecliningColor
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2342,8 +2348,9 @@ MonoBehaviour:
         _onOwnershipLocked:
           m_PersistentCalls:
             m_Calls:
-            - m_Target: {fileID: 0}
-              m_TargetAssemblyTypeName: RendererColorSetter, Assembly-CSharp
+            - m_Target: {fileID: 1484254729}
+              m_TargetAssemblyTypeName: Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkTransform_2D.RendererColorSetter,
+                Assembly-CSharp
               m_MethodName: SetLockedColor
               m_Mode: 1
               m_Arguments:
@@ -2357,8 +2364,9 @@ MonoBehaviour:
         _onOwnershipUnlocked:
           m_PersistentCalls:
             m_Calls:
-            - m_Target: {fileID: 0}
-              m_TargetAssemblyTypeName: RendererColorSetter, Assembly-CSharp
+            - m_Target: {fileID: 1484254729}
+              m_TargetAssemblyTypeName: Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkTransform_2D.RendererColorSetter,
+                Assembly-CSharp
               m_MethodName: SetUnlockedColor
               m_Mode: 1
               m_Arguments:
@@ -2944,7 +2952,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0, g: 0.5019608, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
