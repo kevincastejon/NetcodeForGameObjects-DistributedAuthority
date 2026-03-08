@@ -1464,8 +1464,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1807880254}
+        m_TargetAssemblyTypeName: Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedUIComponents.GameManager,
+          Assembly-CSharp
         m_MethodName: Host
         m_Mode: 1
         m_Arguments:
@@ -3934,8 +3935,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1807880254}
+        m_TargetAssemblyTypeName: Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedUIComponents.GameManager,
+          Assembly-CSharp
         m_MethodName: Join
         m_Mode: 1
         m_Arguments:
@@ -5750,7 +5752,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1001502547}
   m_Direction: 2
   m_Value: 0.00000009082613
-  m_Size: 0.29000032
+  m_Size: 0.58
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6310,7 +6312,7 @@ MonoBehaviour:
   ConnectionData:
     Address: 127.0.0.1
     Port: 7777
-    ServerListenAddress: 0.0.0.0
+    ServerListenAddress: 127.0.0.1
     ClientBindPort: 0
   DebugSimulator:
     PacketDelayMS: 50
@@ -6332,10 +6334,10 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 1145952318}
-    PlayerPrefab: {fileID: 3003796858359695367, guid: 55ee05836aefa6242a1aa553ebf98d7c, type: 3}
+    PlayerPrefab: {fileID: 3278366678552144677, guid: 4d9ca0e16f8ea28449fcc73ce8b8fe70, type: 3}
     Prefabs:
       NetworkPrefabsLists:
-      - {fileID: 11400000, guid: e4ab3690f6a8112439574b2c3ff4c848, type: 2}
+      - {fileID: 11400000, guid: e4107300bc1e3f849893e997ea7ebd8a, type: 2}
     TickRate: 30
     ClientConnectionBufferTimeout: 10
     ConnectionApproval: 0
@@ -6641,7 +6643,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1681776559}
   m_Direction: 0
   m_Value: 0.9999999
-  m_Size: 0.15052631
+  m_Size: 0.30105263
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8489,6 +8491,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1425594455}
   - component: {fileID: 1425594456}
+  - component: {fileID: 1425594457}
   m_Layer: 5
   m_Name: LockOnOwnershipToggle
   m_TagString: Untagged
@@ -8564,31 +8567,41 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1073406426}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1425594457}
+        m_TargetAssemblyTypeName: Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkUI_2D.OwnershipLockingOnGainPolicySetter,
+          Assembly-CSharp
+        m_MethodName: SetOwnershipLockingOnGainPolicy
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 72009556}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 1
+--- !u!114 &1425594457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425594454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0e32a2ff8990524f9a1e4c1d6ba77b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OwnershipLockingOnGainPolicySetter
+  _networkUIComponents:
+  - {fileID: 72009561}
+  - {fileID: 1073406430}
+  - {fileID: 1313182187}
+  - {fileID: 1213468623}
+  - {fileID: 1120124899}
+  - {fileID: 2087850541}
+  - {fileID: 388034785}
+  - {fileID: 356471556}
 --- !u!1 &1553717940
 GameObject:
   m_ObjectHideFlags: 0

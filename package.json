@@ -2,7 +2,7 @@
   "name": "com.caskev.netcode.gameobjects.distributed.authority",
   "version": "0.1.0",
   "displayName": "Netcode For GameObjects - Distributed Authority",
-  "description": "An extension of Unity's Netcode for GameObjects package that offers a configurable distributed authority system that manages ownership requests from clients with prediction support.",
+  "description": "An extension of Unity's Netcode for GameObjects package that leverages the ownership system with reliable tracked requests from clients and prediction support.",
   "keywords": [
     "netcode",
     "ngo",
@@ -31,9 +31,9 @@
       "path": "Samples~/DistributedNetworkRigidbody-3D"
     },
     {
-      "displayName": "Distributed Network UI",
+      "displayName": "Distributed Network UI Components",
       "description": "A multiplayer demo using the DistributedNetworkUIComponent component.",
-      "path": "Samples~/DistributedUIComponents"
+      "path": "Samples~/DistributedNetworkUIComponents"
     }
   ],
   "author": {
