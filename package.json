@@ -38,7 +38,11 @@
   ],
   "author": {
     "name": "Kevin Castejon",
-    "email": "kevincastejon@gmail.com",
-    "url": "https://www.kevincastejon.fr"
+    "url": "https://www.kevincastejon.fr",
+    "email": "kevincastejon@gmail.com"
+  },
+  "dependencies": {
+    "com.unity.netcode.gameobjects": "2.10.0",
+    "com.unity.ugui": "2.0.0"
   }
 }
