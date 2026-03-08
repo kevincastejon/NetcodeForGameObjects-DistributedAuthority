@@ -1,6 +1,6 @@
 {
-    "name": "NetcodeForGameObjects.DistributedAuthority.Editor",
-    "rootNamespace": "NetcodeForGameObjects.DistributedAuthority",
+    "name": "Caskev.NetcodeForGameObjects.DistributedAuthority.Editor",
+    "rootNamespace": "Caskev.NetcodeForGameObjects.DistributedAuthority",
     "references": [
         "GUID:b187d636947610f46b72dba38bad7227",
         "GUID:1491147abca9d7d4bb7105af628b223e",
