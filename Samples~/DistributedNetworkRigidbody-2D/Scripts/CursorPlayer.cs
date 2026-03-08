@@ -15,7 +15,6 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedR
         [SerializeField] private bool _throwOnRelease;
         private Camera _camera;
         private Renderer _renderer;
-        private DistributedNetworkTransform _draggedObject;
         private DistributedNetworkRigidbody2D _draggedPhysicsObject;
         private Vector2 _lastPosition;
         private Vector2 _kinematicVelocity;
@@ -66,19 +65,7 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedR
         private void Update()
         {
             FollowMouse();
-            if (_draggedObject)
-            {
-                if (!_mouseClickInput.IsPressed())
-                {
-                    _draggedObject.DeclineOwnership(CompleteTransformPose.FromTransform(_draggedObject.transform));
-                    _draggedObject = null;
-                }
-                else
-                {
-                    _draggedObject.transform.position = transform.position;
-                }
-            }
-            else if (_draggedPhysicsObject)
+            if (_draggedPhysicsObject)
             {
                 if (!_mouseClickInput.IsPressed())
                 {
@@ -96,23 +83,14 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedR
                 RaycastHit2D hit = Physics2D.GetRayIntersection(_camera.ScreenPointToRay(_mousePositionInput.ReadValue<Vector2>()));
                 if (hit.collider)
                 {
-                    DistributedNetworkTransform ball = hit.collider.GetComponent<DistributedNetworkTransform>();
+                    DistributedNetworkRigidbody2D ball = hit.collider.GetComponent<DistributedNetworkRigidbody2D>();
                     if (ball)
                     {
-                        if (ball.IsOwner || !ball.IsOwnershipLocked)
+                        if (ball && (ball.IsOwner || !ball.IsOwnershipLocked))
                         {
-                            _draggedObject = ball;
-                            ball.RequestOwnership();
-                        }
-                    }
-                    else
-                    {
-                        DistributedNetworkRigidbody2D physicsBall = hit.collider.GetComponent<DistributedNetworkRigidbody2D>();
-                        if (physicsBall && (physicsBall.IsOwner || !physicsBall.IsOwnershipLocked))
-                        {
-                            _draggedPhysicsObject = physicsBall;
+                            _draggedPhysicsObject = ball;
                             _draggedPhysicsObject.Rigidbody.bodyType = RigidbodyType2D.Kinematic;
-                            physicsBall.RequestOwnership();
+                            ball.RequestOwnership();
                         }
                     }
                 }
