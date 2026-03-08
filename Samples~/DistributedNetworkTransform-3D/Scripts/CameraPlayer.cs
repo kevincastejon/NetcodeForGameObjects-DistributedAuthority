@@ -1,11 +1,19 @@
 using Caskev.NetcodeForGameObjects.DistributedAuthority;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkTransform_3D
 {
     public class CameraPlayer : NetworkBehaviour
     {
+        [SerializeField] private InputAction _mouseDeltaInput;
+        [SerializeField] private InputAction _mouseClickInput;
+        [SerializeField] private InputAction _moveInput;
+        [SerializeField] private InputAction _moveUpInput;
+        [SerializeField] private InputAction _moveDownInput;
+        [SerializeField] private InputAction _sprintInput;
+        [SerializeField] private InputAction _escapeInput;
         [Tooltip("Throw rigidbodies on release")]
         [SerializeField] private bool _throwOnRelease;
         [SerializeField] private Transform _grabPoint;
@@ -17,7 +25,7 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedN
         public bool focusOnEnable = true; // whether or not to focus and lock cursor immediately on enable
 
         private DistributedNetworkTransform _draggedObject;
-        private Caskev.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkRigidbody _draggedPhysicsObject;
+        private DistributedNetworkRigidbody _draggedPhysicsObject;
 
         private Vector3 _lastPosition;
         private Vector3 _kinematicVelocity;
@@ -41,9 +49,27 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedN
         }
         private void OnEnable()
         {
+            _mouseDeltaInput.Enable();
+            _mouseClickInput.Enable();
+            _moveInput.Enable();
+            _moveUpInput.Enable();
+            _moveDownInput.Enable();
+            _sprintInput.Enable();
+            _escapeInput.Enable();
             if (focusOnEnable) Focused = true;
         }
-        private void OnDisable() => Focused = false;
+        private void OnDisable()
+        {
+            _mouseDeltaInput.Disable();
+            _mouseClickInput.Disable();
+            _moveInput.Disable();
+            _moveUpInput.Disable();
+            _moveDownInput.Disable();
+            _sprintInput.Disable();
+            _escapeInput.Disable();
+            Focused = false;
+        }
+
         private void FixedUpdate()
         {
             if (_draggedPhysicsObject)
@@ -63,7 +89,7 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedN
             // Input
             if (Focused)
                 UpdateInput();
-            else if (Input.GetMouseButtonDown(0))
+            else if (_mouseClickInput.WasPressedThisFrame())
                 Focused = true;
 
             // Physics
@@ -73,7 +99,7 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedN
             // Grabbing & UnGrabbing
             if (_draggedObject)
             {
-                if (!Input.GetMouseButton(0))
+                if (!_mouseClickInput.IsPressed())
                 {
                     _draggedObject.DeclineOwnership(CompleteTransformPose.FromTransform(_draggedObject.transform));
                     _draggedObject = null;
@@ -86,7 +112,7 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedN
             }
             else if (_draggedPhysicsObject)
             {
-                if (!Input.GetMouseButton(0))
+                if (!_mouseClickInput.IsPressed())
                 {
                     if (!_draggedPhysicsObject.OriginalKinematicState || _throwOnRelease)
                     {
@@ -98,9 +124,9 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedN
                     _draggedPhysicsObject = null;
                 }
             }
-            else if (Input.GetMouseButtonDown(0))
+            else if (_mouseClickInput.WasPressedThisFrame())
             {
-                if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 3f))
+                if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 3f))
                 {
                     DistributedNetworkTransform obj = hit.collider.GetComponent<DistributedNetworkTransform>();
                     if (obj)
@@ -152,35 +178,37 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedN
             velocity += GetAccelerationVector() * Time.deltaTime;
 
             // Rotation
-            Vector2 mouseDelta = lookSensitivity * new Vector2(Input.GetAxis("Mouse X"), -Input.GetAxis("Mouse Y"));
+            Vector2 mouseDelta = _mouseDeltaInput.ReadValue<Vector2>();
+            mouseDelta.y *= -1;
+            mouseDelta = lookSensitivity * mouseDelta;
             Quaternion rotation = transform.rotation;
             Quaternion horiz = Quaternion.AngleAxis(mouseDelta.x, Vector3.up);
             Quaternion vert = Quaternion.AngleAxis(mouseDelta.y, Vector3.right);
             transform.rotation = horiz * rotation * vert;
 
             // Leave cursor lock
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (_escapeInput.WasPressedThisFrame())
                 Focused = false;
         }
         private Vector3 GetAccelerationVector()
         {
             Vector3 moveInput = default;
 
-            void AddMovement(KeyCode key, Vector3 dir)
+            void AddMovement(bool inputPressed, Vector3 dir)
             {
-                if (Input.GetKey(key))
+                if (inputPressed)
                     moveInput += dir;
             }
-
-            AddMovement(KeyCode.W, Vector3.forward);
-            AddMovement(KeyCode.S, Vector3.back);
-            AddMovement(KeyCode.D, Vector3.right);
-            AddMovement(KeyCode.A, Vector3.left);
-            AddMovement(KeyCode.Space, Vector3.up);
-            AddMovement(KeyCode.LeftControl, Vector3.down);
+            Vector2 move = _moveInput.ReadValue<Vector2>();
+            AddMovement(move.y > 0f, Vector3.forward);
+            AddMovement(move.y < 0f, Vector3.back);
+            AddMovement(move.x > 0f, Vector3.right);
+            AddMovement(move.x < 0f, Vector3.left);
+            AddMovement(_moveUpInput.IsPressed(), Vector3.up);
+            AddMovement(_moveDownInput.IsPressed(), Vector3.down);
             Vector3 direction = transform.TransformVector(moveInput.normalized);
 
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (_sprintInput.IsPressed())
                 return direction * (acceleration * accSprintMultiplier); // "sprinting"
             return direction * acceleration; // "walking"
         }
