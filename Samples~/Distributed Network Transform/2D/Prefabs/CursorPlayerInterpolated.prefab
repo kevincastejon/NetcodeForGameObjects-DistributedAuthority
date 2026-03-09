@@ -16,9 +16,13 @@ PrefabInstance:
       propertyPath: Interpolate
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 880466897875958944, guid: 4852f07b38122ec46bd0408b36e283d5, type: 3}
+      propertyPath: PositionInterpolationType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3003796858359695367, guid: 4852f07b38122ec46bd0408b36e283d5, type: 3}
       propertyPath: m_Name
-      value: CursorPlayer Variant
+      value: CursorPlayerInterpolated
       objectReference: {fileID: 0}
     - target: {fileID: 5001323226945937876, guid: 4852f07b38122ec46bd0408b36e283d5, type: 3}
       propertyPath: m_LocalPosition.x

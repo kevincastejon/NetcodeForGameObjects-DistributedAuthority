@@ -9,7 +9,7 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedN
         {
             foreach (var nuic in _networkUIComponents)
             {
-                nuic.OwnershipLockingOnGain = value ? DistributedNetworkUIComponent.OwnershipLockingOnGainPolicy.FORCE_LOCK : DistributedNetworkUIComponent.OwnershipLockingOnGainPolicy.FORCE_UNLOCK;
+                nuic.OwnershipLockingOnGain = value ? OwnershipLockingOnGainPolicy.FORCE_LOCK : OwnershipLockingOnGainPolicy.FORCE_UNLOCK;
             }
         }
     }

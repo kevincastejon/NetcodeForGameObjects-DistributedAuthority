@@ -56,6 +56,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5526260989551852605, guid: 55ee05836aefa6242a1aa553ebf98d7c, type: 3}
+      propertyPath: Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5526260989551852605, guid: 55ee05836aefa6242a1aa553ebf98d7c, type: 3}
+      propertyPath: PositionInterpolationType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6887196766120721236, guid: 55ee05836aefa6242a1aa553ebf98d7c, type: 3}
       propertyPath: Interpolate
       value: 1

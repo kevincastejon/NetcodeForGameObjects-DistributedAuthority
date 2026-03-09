@@ -792,7 +792,7 @@ GameObject:
   - component: {fileID: 1137037957}
   - component: {fileID: 1137037956}
   m_Layer: 5
-  m_Name: Image
+  m_Name: AimPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
