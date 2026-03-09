@@ -17,7 +17,8 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
             BEEN_ROBBED,
         }
 
-        [Tooltip("The current distributed authority state.")][SerializeField] private DistributedAuthorityState _currentState = DistributedAuthorityState.NONE;
+        [Tooltip("The current distributed authority state.")]
+        [SerializeField] private DistributedAuthorityState _currentState = DistributedAuthorityState.NONE;
         [Tooltip("Determine the ownership locking behaviour when an ownership request is accepted\r\n        - CUSTOM : Will use the RequestOwnership method parameter to determine if the ownership will be locked or not\r\n        - FORCE_LOCK : Will lock the ownership regardless of the RequestOwnership method parameter\r\n        - FORCE_UNLOCK : Will not lock the ownership regardless of the RequestOwnership method parameter")]
         [SerializeField] private OwnershipLockingOnGainPolicy _ownershipLockingOnGainPolicy;
         [Tooltip("A set of events related to the distributed authority state changes.")]
@@ -117,7 +118,7 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         /// Is the ownership of the object locked on the current owner
         /// </summary>
         public bool IsOwnershipLocked { get => _isOwnershipLocked; }
-        private void Awake()
+        protected virtual void Awake()
         {
             if (GetComponent<NetworkObject>() == null)
             {

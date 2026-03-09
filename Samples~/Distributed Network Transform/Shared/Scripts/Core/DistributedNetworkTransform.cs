@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.Netcode.Components;
-using UnityEngine;
 namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkTransform_Shared
 {
     [GenerateSerializationForType(typeof(CompleteTransformPose))]
@@ -11,7 +10,7 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedN
     {
         private NetworkTransform _netTransform;
 
-        private void Awake()
+        protected override void Awake()
         {
             _netTransform = GetComponent<NetworkTransform>();
         }

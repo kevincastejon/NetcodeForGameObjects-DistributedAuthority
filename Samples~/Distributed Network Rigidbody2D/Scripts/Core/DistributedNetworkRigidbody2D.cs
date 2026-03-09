@@ -22,7 +22,7 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedN
         public bool AutomaticallyDeclineOnAsleep { get => _automaticallyDeclineOnAsleep; }
         public RigidbodyType2D OriginalKinematicState { get => _originalKinematicState; }
 
-        private void Awake()
+        protected override void Awake()
         {
             _netTransform = GetComponent<NetworkTransform>();
             _rigidbody = GetComponent<Rigidbody2D>();

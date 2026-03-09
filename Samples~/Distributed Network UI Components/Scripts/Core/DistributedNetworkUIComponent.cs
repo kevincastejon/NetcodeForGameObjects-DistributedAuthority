@@ -70,7 +70,7 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedN
         /// </summary>
         public Selectable Selectable { get => _selectable; }
 
-        private void Awake()
+        protected override void Awake()
         {
             if (_selectable == null)
             {
