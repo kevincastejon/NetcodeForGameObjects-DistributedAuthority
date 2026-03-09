@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine;
-namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedRigidbody2D
+namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedRigidbody
 {
-    public class GameManager : NetworkBehaviour
+    public class GameManager : MonoBehaviour
     {
         [SerializeField] private NetworkManager _networkManager;
         [SerializeField] private UnityTransport _transport;
@@ -61,17 +61,11 @@ namespace Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedR
 
         public void Stop()
         {
-            if (IsHost)
-            {
-                _networkManager.OnClientConnectedCallback -= OnHostDone;
-                _networkManager.OnClientConnectedCallback -= OnClientConnected;
-            }
-            else
-            {
-                _networkManager.OnClientConnectedCallback -= OnConnected;
-                _networkManager.OnClientDisconnectCallback -= OnConnectionFailed;
-                _networkManager.OnClientDisconnectCallback -= OnDisconnected;
-            }
+            _networkManager.OnClientConnectedCallback -= OnHostDone;
+            _networkManager.OnClientConnectedCallback -= OnClientConnected;
+            _networkManager.OnClientConnectedCallback -= OnConnected;
+            _networkManager.OnClientDisconnectCallback -= OnConnectionFailed;
+            _networkManager.OnClientDisconnectCallback -= OnDisconnected;
             _networkManager.Shutdown();
             Debug.Log("SHUTDOWN");
         }

@@ -13,9 +13,9 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         public class DebugParametersInternal
         {
             [Tooltip("Will log every state entering and exiting")]
-            [SerializeField] private bool _statesVerbose;
+            [SerializeField] private bool _statesVerbose = new();
             [Tooltip("Will log every ownership gain, loss, locking, and unlocking")]
-            [SerializeField] private bool _ownershipVerbose;
+            [SerializeField] private bool _ownershipVerbose = new();
             /// <summary>
             /// Will log every state entering and exiting
             /// </summary>
@@ -32,23 +32,27 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         public class StatesEventsInternal
         {
             [Tooltip("Fires when the state has changed")]
-            [SerializeField] private UnityEvent<DistributedAuthorityState> _onStateChanged;
+            [SerializeField] private UnityEvent<DistributedAuthorityState> _onStateChanged = new();
+            [Tooltip("Fires when entered NONE state")]
+            [SerializeField] private UnityEvent _onEnterNone = new();
+            [Tooltip("Fires when exited NONE state")]
+            [SerializeField] private UnityEvent _onExitNone = new();
             [Tooltip("Fires when entered AUTHORITY state")]
-            [SerializeField] private UnityEvent _onEnterAuthority;
+            [SerializeField] private UnityEvent _onEnterAuthority = new();
             [Tooltip("Fires when exited AUTHORITY state")]
-            [SerializeField] private UnityEvent _onExitAuthority;
+            [SerializeField] private UnityEvent _onExitAuthority = new();
             [Tooltip("Fires when entered REMOTE state")]
-            [SerializeField] private UnityEvent _onEnterRemote;
+            [SerializeField] private UnityEvent _onEnterRemote = new();
             [Tooltip("Fires when exited REMOTE state")]
-            [SerializeField] private UnityEvent _onExitRemote;
+            [SerializeField] private UnityEvent _onExitRemote = new();
             [Tooltip("Fires when entered REQUESTING state")]
-            [SerializeField] private UnityEvent _onEnterRequesting;
+            [SerializeField] private UnityEvent _onEnterRequesting = new();
             [Tooltip("Fires when exited REQUESTING state")]
-            [SerializeField] private UnityEvent _onExitRequesting;
+            [SerializeField] private UnityEvent _onExitRequesting = new();
             [Tooltip("Fires when entered DECLINING state")]
-            [SerializeField] private UnityEvent _onEnterDeclining;
+            [SerializeField] private UnityEvent _onEnterDeclining = new();
             [Tooltip("Fires when exited DECLINING state")]
-            [SerializeField] private UnityEvent _onExitDeclining;
+            [SerializeField] private UnityEvent _onExitDeclining = new();
             /// <summary>
             /// Fires when the state has changed
             /// </summary>
@@ -85,6 +89,14 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
             /// Fires when exited DECLINING state
             /// </summary>
             public UnityEvent OnExitedDeclining { get => _onExitDeclining; }
+            /// <summary>
+            /// Fires when entered NONE state
+            /// </summary>
+            public UnityEvent OnEnteredNone { get => _onEnterNone; }
+            /// <summary>
+            /// Fires when exited NONE state
+            /// </summary>
+            public UnityEvent OnExitedNone { get => _onExitNone; }
         }
         [Serializable]
         /// <summary>
@@ -105,21 +117,21 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
                 public class OwnershipEventsSet
                 {
                     [Tooltip("Fires when the ownership has been gained by player")]
-                    [SerializeField] private UnityEvent<ulong> _onOwnershipGained;
+                    [SerializeField] private UnityEvent<ulong> _onOwnershipGained = new();
                     [Tooltip("Fires when the ownership has been lost by player")]
-                    [SerializeField] private UnityEvent<ulong> _onOwnershipLost;
+                    [SerializeField] private UnityEvent<ulong> _onOwnershipLost = new();
                     [Tooltip("Fires when ownership is locked on player")]
-                    [SerializeField] private UnityEvent<ulong> _onOwnershipLocked;
+                    [SerializeField] private UnityEvent<ulong> _onOwnershipLocked = new();
                     [Tooltip("Fires when ownership is unlocked on player")]
-                    [SerializeField] private UnityEvent<ulong> _onOwnershipUnlocked;
+                    [SerializeField] private UnityEvent<ulong> _onOwnershipUnlocked = new();
                     [Tooltip("Fires when ownership is robbed from player")]
-                    [SerializeField] private UnityEvent<ulong> _onOwnershipRobbedFrom;
+                    [SerializeField] private UnityEvent<ulong> _onOwnershipRobbedFrom = new();
                     [Tooltip("Fires when ownership request is rejected for player")]
-                    [SerializeField] private UnityEvent<ulong> _onOwnershipRequestRejected;
+                    [SerializeField] private UnityEvent<ulong> _onOwnershipRequestRejected = new();
                     [Tooltip("Fires when ownership request is accepted for player")]
-                    [SerializeField] private UnityEvent<ulong> _onOwnershipRequestAccepted;
+                    [SerializeField] private UnityEvent<ulong> _onOwnershipRequestAccepted = new();
                     [Tooltip("Fires when ownership is declined from player")]
-                    [SerializeField] private UnityEvent<ulong> _onOwnershipDeclined;
+                    [SerializeField] private UnityEvent<ulong> _onOwnershipDeclined = new();
 
                     /// <summary>
                     /// Fires when the ownership has been gained by player
@@ -155,11 +167,11 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
                     public UnityEvent<ulong> OnOwnershipDeclined { get => _onOwnershipDeclined; }
                 }
                 [Tooltip("A set of events related to ownership changes. These events will fire on both client and server sides")]
-                [SerializeField] private OwnershipEventsSet _crossSideEvents;
+                [SerializeField] private OwnershipEventsSet _crossSideEvents = new();
                 [Tooltip("A set of events related to ownership changes. These events will fire only client-side")]
-                [SerializeField] private OwnershipEventsSet _clientSideEvents;
+                [SerializeField] private OwnershipEventsSet _clientSideEvents = new();
                 [Tooltip("A set of events related to ownership changes. These events will fire only server-side")]
-                [SerializeField] private OwnershipEventsSet _serverSideEvents;
+                [SerializeField] private OwnershipEventsSet _serverSideEvents = new();
                 /// <summary>
                 /// A set of events related to ownership changes. These events will fire on both client and server sides
                 /// </summary>
@@ -174,11 +186,11 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
                 public OwnershipEventsSet ServerSideEvents { get => _serverSideEvents; }
             }
             [Tooltip("Three sets of events related to ownership changes. These events will fire when any client or server is concerned")]
-            [SerializeField] private OwnershipEventsGroup _events;
+            [SerializeField] private OwnershipEventsGroup _events = new();
             [Tooltip("Three sets of events related to ownership changes. These events will fire only when the local client or server is concerned")]
-            [SerializeField] private OwnershipEventsGroup _localEvents;
+            [SerializeField] private OwnershipEventsGroup _localEvents = new();
             [Tooltip("Three sets of events related to ownership changes. These events will fire only when a remote client or server is concerned")]
-            [SerializeField] private OwnershipEventsGroup _remoteEvents;
+            [SerializeField] private OwnershipEventsGroup _remoteEvents = new();
             /// <summary>
             /// A set of events related to ownership changes. These events will fire when any client or server is concerned
             /// </summary>
@@ -206,13 +218,15 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         }
         /// <summary>
         /// An enumeration of the different distributedc authority states
-        /// - AUTHORITY : The local player has authority over the object
-        /// - REMOTE : A remote player has authority over the object
-        /// - REQUESTING : The local player is requesting authority (non-host clients only)
-        /// - DECLINING : The local player is declining authority (non-host clients only)
+        /// - NONE : The object is not spawned.
+        /// - AUTHORITY : The local player (or server) has authority over the object.
+        /// - REMOTE : The local player (or server) has not authority over the object.
+        /// - REQUESTING : The local player is requesting authority (non-host clients only).
+        /// - DECLINING : The local player is declining authority (non-host clients only).
         /// </summary>
         public enum DistributedAuthorityState
         {
+            NONE,
             AUTHORITY,
             REMOTE,
             REQUESTING,
@@ -242,15 +256,15 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
             BEEN_ROBBED,
         }
 
-        [Tooltip("The current distributed authority state.")][SerializeField] private DistributedAuthorityState _currentState;
+        [Tooltip("The current distributed authority state.")][SerializeField] private DistributedAuthorityState _currentState = DistributedAuthorityState.NONE;
         [Tooltip("Determine the ownership locking behaviour when an ownership request is accepted\r\n        - CUSTOM : Will use the RequestOwnership method parameter to determine if the ownership will be locked or not\r\n        - FORCE_LOCK : Will lock the ownership regardless of the RequestOwnership method parameter\r\n        - FORCE_UNLOCK : Will not lock the ownership regardless of the RequestOwnership method parameter")]
         [SerializeField] private OwnershipLockingOnGainPolicy _ownershipLockingOnGainPolicy;
         [Tooltip("A set of events related to the distributed authority state changes.")]
-        [SerializeField] private StatesEventsInternal _statesEvents;
+        [SerializeField] private StatesEventsInternal _statesEvents = new();
         [Tooltip("A set of events related to the ownership changes.")]
-        [SerializeField] private OwnershipEventsInternal _ownershipEvents;
+        [SerializeField] private OwnershipEventsInternal _ownershipEvents = new();
         [Tooltip("A set of debug parameters.")]
-        [SerializeField] private DebugParametersInternal _debugParameters;
+        [SerializeField] private DebugParametersInternal _debugParameters = new();
 
 
         // client-side only
@@ -278,6 +292,9 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
                 _currentState = value;
                 switch (oldValue)
                 {
+                    case DistributedAuthorityState.NONE:
+                        OnExitNoneInternal();
+                        break;
                     case DistributedAuthorityState.AUTHORITY:
                         OnExitAuthorityInternal();
                         break;
@@ -295,6 +312,9 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
                 }
                 switch (_currentState)
                 {
+                    case DistributedAuthorityState.NONE:
+                        OnEnterNoneInternal();
+                        break;
                     case DistributedAuthorityState.AUTHORITY:
                         OnEnterAuthorityInternal();
                         break;
@@ -337,10 +357,6 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         /// </summary>
         public bool IsOwnershipLocked { get => _isOwnershipLocked; }
 
-        public virtual void Start()
-        {
-            OnEnterAuthorityInternal();
-        }
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
@@ -359,6 +375,10 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         public override void OnNetworkDespawn()
         {
             base.OnNetworkDespawn();
+            if (IsServer && NetworkManager.Singleton != null)
+            {
+                NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnectedServerSide;
+            }
             _localOwnershipSessionId = 0;
             _remoteOwnershipSessionId = 0;
             _decliningData = default;
@@ -371,7 +391,7 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
                 OnOwnershipUnlocked(0);
                 _ownershipEvents.Events.CrossSideEvents.OnOwnershipUnlocked.Invoke(0);
             }
-            CurrentState = DistributedAuthorityState.AUTHORITY;
+            CurrentState = DistributedAuthorityState.NONE;
         }
         protected override void OnOwnershipChanged(ulong previous, ulong current)
         {
@@ -573,7 +593,7 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
             if (_isOwnershipLocked)
             {
                 _isOwnershipLocked = false;
-                OnOwnershipUnlockedInternal(OwnerClientId);
+                OnOwnershipUnlockedInternal(requester);
             }
         }
         #endregion
@@ -584,6 +604,10 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         /// </summary>
         public virtual void LockOwnership()
         {
+            if (!IsSpawned)
+            {
+                return;
+            }
             LockOwnershipRpc(_localOwnershipSessionId);
         }
         [Rpc(SendTo.Server)]
@@ -605,6 +629,10 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         /// </summary>
         public virtual void UnlockOwnership()
         {
+            if (!IsSpawned)
+            {
+                return;
+            }
             UnlockOwnershipRpc(_localOwnershipSessionId);
         }
         [Rpc(SendTo.Server)]
@@ -719,6 +747,18 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
 
         #endregion
         #region Statemachine events and callbacks
+        private void OnEnterNoneInternal()
+        {
+            if (_debugParameters.StatesVerbose) Debug.Log("ENTER NONE");
+            OnEnterNone();
+            _statesEvents.OnEnteredNone.Invoke();
+        }
+        private void OnExitNoneInternal()
+        {
+            if (_debugParameters.StatesVerbose) Debug.Log("EXIT NONE");
+            OnExitNone();
+            _statesEvents.OnExitedNone.Invoke();
+        }
         private void OnEnterAuthorityInternal()
         {
             if (_debugParameters.StatesVerbose) Debug.Log("ENTER AUTHORITY");
@@ -778,7 +818,14 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
             OnExitDeclining();
             _statesEvents.OnExitedDeclining.Invoke();
         }
-
+        /// <summary>
+        /// Called when entered the NONE state.
+        /// </summary>
+        public virtual void OnEnterNone() { }
+        /// <summary>
+        /// Called when exited the NONE state.
+        /// </summary>
+        public virtual void OnExitNone() { }
         /// <summary>
         /// Called when entered the AUTHORITY state.
         /// </summary>
@@ -811,6 +858,7 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         /// Called when exited the DECLINING state.
         /// </summary>
         public virtual void OnExitDeclining() { }
+        
         /// <summary>
         /// Called server-side only, when getting passive authority on the object after a client (not host) has declined ownership.
         /// This method is usefull, when a client declined authority itself, to handle short ownership duration, where data might not have had the time to actually fully reach the server, so the last state can still be applied.

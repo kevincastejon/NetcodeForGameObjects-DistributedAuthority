@@ -959,7 +959,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62bbcf55b9ab44047a55120bdff66d1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkTransform_3D.GameManager
-  ShowTopMostFoldoutHeaderGroup: 1
   _networkManager: {fileID: 124347258}
   _transport: {fileID: 124347257}
 --- !u!1 &1295739883
@@ -1309,6 +1308,12 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     _onExitDeclining:
+      m_PersistentCalls:
+        m_Calls: []
+    _onEnterNone:
+      m_PersistentCalls:
+        m_Calls: []
+    _onExitNone:
       m_PersistentCalls:
         m_Calls: []
   _ownershipEvents:
@@ -2008,8 +2013,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1238722005}
+        m_TargetAssemblyTypeName: Caskev.Samples.NetcodeForGameObjects.DistributedAuthority.DistributedNetworkTransform_3D.GameManager,
+          Assembly-CSharp
         m_MethodName: Stop
         m_Mode: 1
         m_Arguments:

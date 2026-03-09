@@ -2,7 +2,7 @@
   "name": "com.caskev.netcode.gameobjects.distributed.authority",
   "version": "0.1.0",
   "displayName": "Netcode For GameObjects - Distributed Authority",
-  "description": "An extension of Unity's Netcode for GameObjects package that leverages the ownership system with reliable tracked requests from clients and prediction support.",
+  "description": "An extension of Unity's Netcode for GameObjects package that leverages the native ownership system with reliable tracked clients ownership requests, ownership locking options and prediction support.",
   "keywords": [
     "netcode",
     "ngo",
@@ -13,27 +13,27 @@
     {
       "displayName": "2D Distributed Network Transform",
       "description": "A 2D multiplayer demo using the DistributedNetworkTransform component.",
-      "path": "Samples~/DistributedNetworkTransform-2D"
+      "path": "Samples~/2D Distributed Network Transform"
     },
     {
       "displayName": "2D Distributed Network Rigidbody",
       "description": "A 2D multiplayer demo using the DistributedNetworkRigidbody2D component.",
-      "path": "Samples~/DistributedNetworkRigidbody-2D"
+      "path": "Samples~/2D Distributed Network Rigidbody"
     },
     {
       "displayName": "3D Distributed Network Transform",
       "description": "A 3D multiplayer demo using the DistributedNetworkTransform component.",
-      "path": "Samples~/DistributedNetworkTransform-3D"
+      "path": "Samples~/3D Distributed Network Transform"
     },
     {
       "displayName": "3D Distributed Network Rigidbody",
       "description": "A 3D multiplayer demo using the DistributedNetworkRigidbody component.",
-      "path": "Samples~/DistributedNetworkRigidbody-3D"
+      "path": "Samples~/3D Distributed Network Rigidbody"
     },
     {
       "displayName": "Distributed Network UI Components",
       "description": "A multiplayer demo using the DistributedNetworkUIComponent component.",
-      "path": "Samples~/DistributedNetworkUIComponents"
+      "path": "Samples~/Distributed Network UI Components"
     }
   ],
   "author": {
