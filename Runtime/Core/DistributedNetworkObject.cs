@@ -153,7 +153,7 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
             if (_isOwnershipLocked)
             {
                 _isOwnershipLocked = false;
-                if (_debugParameters.OwnershipVerbose) Debug.Log("OWNERSHIP UNLOCKED ON DESPAWN");
+                if (_debugParameters.OwnershipVerbose) Debug.Log($"[DistributedNetworkObject] [OnNetworkDespawn] OWNERSHIP UNLOCKED ON DESPAWN", gameObject);
                 OnOwnershipUnlocked(0);
                 _ownershipEvents.Events.CrossSideEvents.OnOwnershipUnlocked.Invoke(0);
             }
@@ -297,7 +297,7 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         {
             if (!IsServer)
             {
-                Debug.LogError("This method can only be called server-side");
+                Debug.LogError($"[DistributedNetworkObject] [Awake] This method can only be called server-side", gameObject);
                 return;
             }
             DeclineOwnershipServerSide(OwnerClientId, _remoteOwnershipSessionId, DecliningReason.SERVER_FORCE, default, false);
@@ -306,7 +306,7 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         {
             if (!IsServer)
             {
-                Debug.LogError("This method can only be called server-side");
+                Debug.LogError($"[DistributedNetworkObject] [Awake] This method can only be called server-side", gameObject);
                 return;
             }
             DeclineOwnershipServerSide(OwnerClientId, _remoteOwnershipSessionId, DecliningReason.SERVER_FORCE, decliningData, true);
@@ -516,44 +516,44 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         #region Statemachine events and callbacks
         private void OnEnterNoneInternal()
         {
-            if (_debugParameters.StatesVerbose) Debug.Log("ENTER NONE");
+            if (_debugParameters.StatesVerbose) Debug.Log($"[DistributedNetworkObject] [OnEnterNoneInternal] ENTER NONE", gameObject);
             OnEnterNone();
             _statesEvents.OnEnteredNone.Invoke();
         }
         private void OnExitNoneInternal()
         {
-            if (_debugParameters.StatesVerbose) Debug.Log("EXIT NONE");
+            if (_debugParameters.StatesVerbose) Debug.Log($"[DistributedNetworkObject] [OnExitNoneInternal] EXIT NONE", gameObject);
             OnExitNone();
             _statesEvents.OnExitedNone.Invoke();
         }
         private void OnEnterAuthorityInternal()
         {
-            if (_debugParameters.StatesVerbose) Debug.Log("ENTER AUTHORITY");
+            if (_debugParameters.StatesVerbose) Debug.Log($"[DistributedNetworkObject] [OnEnterAuthorityInternal] ENTER AUTHORITY", gameObject);
             _remoteOwnershipSessionId = 0;
             OnEnterAuthority();
             _statesEvents.OnEnteredAuthority.Invoke();
         }
         private void OnExitAuthorityInternal()
         {
-            if (_debugParameters.StatesVerbose) Debug.Log("EXIT AUTHORITY");
+            if (_debugParameters.StatesVerbose) Debug.Log($"[DistributedNetworkObject] [OnExitAuthorityInternal] EXIT AUTHORITY", gameObject);
             OnExitAuthority();
             _statesEvents.OnExitedAuthority.Invoke();
         }
         private void OnEnterRemoteInternal()
         {
-            if (_debugParameters.StatesVerbose) Debug.Log("ENTER REMOTE");
+            if (_debugParameters.StatesVerbose) Debug.Log($"[DistributedNetworkObject] [OnEnterRemoteInternal] ENTER REMOTE", gameObject);
             OnEnterRemote();
             _statesEvents.OnEnteredRemote.Invoke();
         }
         private void OnExitRemoteInternal()
         {
-            if (_debugParameters.StatesVerbose) Debug.Log("EXIT REMOTE");
+            if (_debugParameters.StatesVerbose) Debug.Log($"[DistributedNetworkObject] [OnExitRemoteInternal] EXIT REMOTE", gameObject);
             OnExitRemote();
             _statesEvents.OnExitedRemote.Invoke();
         }
         private void OnEnterRequestingInternal()
         {
-            if (_debugParameters.StatesVerbose) Debug.Log("ENTER REQUESTING");
+            if (_debugParameters.StatesVerbose) Debug.Log($"[DistributedNetworkObject] [OnEnterRequestingInternal] ENTER REQUESTING", gameObject);
             _localOwnershipSessionId++;
             RequestOwnershipRpc(_localOwnershipSessionId, _useLockOwnership);
             OnEnterRequesting();
@@ -561,13 +561,13 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         }
         private void OnExitRequestingInternal()
         {
-            if (_debugParameters.StatesVerbose) Debug.Log("EXIT REQUESTING");
+            if (_debugParameters.StatesVerbose) Debug.Log($"[DistributedNetworkObject] [OnExitRequestingInternal] EXIT REQUESTING", gameObject);
             OnExitRequesting();
             _statesEvents.OnExitedRequesting.Invoke();
         }
         private void OnEnterDecliningInternal()
         {
-            if (_debugParameters.StatesVerbose) Debug.Log("ENTER DECLINING");
+            if (_debugParameters.StatesVerbose) Debug.Log($"[DistributedNetworkObject] [OnEnterDecliningInternal] ENTER DECLINING", gameObject);
             if (_useDecliningData)
             {
                 DeclineOwnershipRpc(_localOwnershipSessionId, _decliningData);
@@ -581,7 +581,7 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         }
         private void OnExitDecliningInternal()
         {
-            if (_debugParameters.StatesVerbose) Debug.Log("EXIT DECLINING");
+            if (_debugParameters.StatesVerbose) Debug.Log($"[DistributedNetworkObject] [OnExitDecliningInternal] EXIT DECLINING", gameObject);
             OnExitDeclining();
             _statesEvents.OnExitedDeclining.Invoke();
         }
@@ -625,7 +625,7 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         /// Called when exited the DECLINING state.
         /// </summary>
         public virtual void OnExitDeclining() { }
-        
+
         /// <summary>
         /// Called server-side only, when getting passive authority on the object after a client (not host) has declined ownership.
         /// This method is usefull, when a client declined authority itself, to handle short ownership duration, where data might not have had the time to actually fully reach the server, so the last state can still be applied.
@@ -640,7 +640,7 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         #region Ownership events and callbacks
         private void OnOwnershipGainedInternal(ulong clientId)
         {
-            if (_debugParameters.OwnershipVerbose) Debug.Log("OWNERSHIP GAINED ON PLAYER " + clientId);
+            if (_debugParameters.OwnershipVerbose) Debug.Log($"[DistributedNetworkObject] [OnOwnershipGainedInternal] OWNERSHIP GAINED ON PLAYER " + clientId, gameObject);
             OnOwnershipGained(clientId);
             _ownershipEvents.Events.CrossSideEvents.OnOwnershipGained.Invoke(clientId);
             if (IsServer)
@@ -678,7 +678,7 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         }
         private void OnOwnershipLostInternal(ulong clientId)
         {
-            if (_debugParameters.OwnershipVerbose) Debug.Log("OWNERSHIP LOST ON PLAYER " + clientId);
+            if (_debugParameters.OwnershipVerbose) Debug.Log($"[DistributedNetworkObject] [OnOwnershipLostInternal] OWNERSHIP LOST ON PLAYER " + clientId, gameObject);
             OnOwnershipLost(clientId);
             _ownershipEvents.Events.CrossSideEvents.OnOwnershipLost.Invoke(clientId);
             if (IsServer)
@@ -716,7 +716,7 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         }
         private void OnOwnershipLockedInternal(ulong clientId)
         {
-            if (_debugParameters.OwnershipVerbose) Debug.Log("OWNERSHIP LOCKED ON THE PLAYER " + clientId);
+            if (_debugParameters.OwnershipVerbose) Debug.Log($"[DistributedNetworkObject] [OnOwnershipLockedInternal] OWNERSHIP LOCKED ON THE PLAYER " + clientId, gameObject);
             OnOwnershipLocked(clientId);
             _ownershipEvents.Events.CrossSideEvents.OnOwnershipLocked.Invoke(clientId);
             if (IsServer)
@@ -754,7 +754,7 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         }
         private void OnOwnershipUnlockedInternal(ulong clientId)
         {
-            if (_debugParameters.OwnershipVerbose) Debug.Log("OWNERSHIP UNLOCKED ON THE PLAYER " + clientId);
+            if (_debugParameters.OwnershipVerbose) Debug.Log($"[DistributedNetworkObject] [OnOwnershipUnlockedInternal] OWNERSHIP UNLOCKED ON THE PLAYER " + clientId, gameObject);
             OnOwnershipUnlocked(clientId);
             _ownershipEvents.Events.CrossSideEvents.OnOwnershipUnlocked.Invoke(clientId);
             if (IsServer)
@@ -792,7 +792,7 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         }
         private void OnOwnershipRobbedFromInternal(ulong clientId)
         {
-            if (_debugParameters.OwnershipVerbose) Debug.Log("OWNERSHIP ROBBED FROM THE PLAYER " + clientId);
+            if (_debugParameters.OwnershipVerbose) Debug.Log($"[DistributedNetworkObject] [OnOwnershipRobbedFromInternal] OWNERSHIP ROBBED FROM THE PLAYER " + clientId, gameObject);
             OnOwnershipRobbedFrom(clientId);
             _ownershipEvents.Events.CrossSideEvents.OnOwnershipRobbedFrom.Invoke(clientId);
             if (IsServer)
@@ -830,7 +830,7 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         }
         private void OnOwnershipRequestRejectedInternal(ulong clientId)
         {
-            if (_debugParameters.OwnershipVerbose) Debug.Log("OWNERSHIP REQUEST REJECTED ON THE PLAYER " + clientId);
+            if (_debugParameters.OwnershipVerbose) Debug.Log($"[DistributedNetworkObject] [OnOwnershipRequestRejectedInternal] OWNERSHIP REQUEST REJECTED ON THE PLAYER " + clientId, gameObject);
             OnOwnershipRequestRejected(clientId);
             _ownershipEvents.Events.CrossSideEvents.OnOwnershipRequestRejected.Invoke(clientId);
             if (IsServer)
@@ -868,7 +868,7 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         }
         private void OnOwnershipRequestAcceptedInternal(ulong clientId)
         {
-            if (_debugParameters.OwnershipVerbose) Debug.Log("OWNERSHIP REQUEST ACCEPTED ON THE PLAYER " + clientId);
+            if (_debugParameters.OwnershipVerbose) Debug.Log($"[DistributedNetworkObject] [OnOwnershipRequestAcceptedInternal] OWNERSHIP REQUEST ACCEPTED ON THE PLAYER " + clientId, gameObject);
             OnOwnershipRequestAccepted(clientId);
             _ownershipEvents.Events.CrossSideEvents.OnOwnershipRequestAccepted.Invoke(clientId);
             if (IsServer)
@@ -906,7 +906,7 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         }
         private void OnOwnershipDeclinedInternal(ulong clientId)
         {
-            if (_debugParameters.OwnershipVerbose) Debug.Log("OWNERSHIP REQUEST DECLINED FROM THE PLAYER " + clientId);
+            if (_debugParameters.OwnershipVerbose) Debug.Log($"[DistributedNetworkObject] [OnOwnershipDeclinedInternal] OWNERSHIP REQUEST DECLINED FROM THE PLAYER " + clientId, gameObject);
             OnOwnershipDeclined(clientId);
             _ownershipEvents.Events.CrossSideEvents.OnOwnershipDeclined.Invoke(clientId);
             if (IsServer)
