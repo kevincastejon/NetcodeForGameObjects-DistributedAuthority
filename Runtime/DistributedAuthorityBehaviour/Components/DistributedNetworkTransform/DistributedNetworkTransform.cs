@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Caskev.NetcodeForGameObjects.DistributedAuthority
 {
     [GenerateSerializationForType(typeof(CompleteTransformPose))]
-    public class DistributedNetworkTransform : DistributedAuthorityBehaviour<CompleteTransformPose>
+    public class DistributedNetworkTransform : DistributedNetworkObject<CompleteTransformPose>
     {
         private NetworkTransform _netTransform;
 

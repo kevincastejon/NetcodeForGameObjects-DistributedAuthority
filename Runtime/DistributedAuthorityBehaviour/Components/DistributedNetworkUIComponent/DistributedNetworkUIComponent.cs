@@ -10,7 +10,7 @@ using UnityEngine.UI;
 namespace Caskev.NetcodeForGameObjects.DistributedAuthority
 {
     [GenerateSerializationForType(typeof(UIData))]
-    public class DistributedNetworkUIComponent : DistributedAuthorityBehaviour<UIData>
+    public class DistributedNetworkUIComponent : DistributedNetworkObject<UIData>
     {
         /// <summary>
         /// An enumeration of the Selectable UI component supported types

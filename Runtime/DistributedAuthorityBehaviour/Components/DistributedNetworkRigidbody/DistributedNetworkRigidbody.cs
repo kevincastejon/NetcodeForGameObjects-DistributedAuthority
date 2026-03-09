@@ -7,7 +7,7 @@ using UnityEngine.Events;
 namespace Caskev.NetcodeForGameObjects.DistributedAuthority
 {
     [GenerateSerializationForType(typeof(CompleteRigidbodyPose))]
-    public class DistributedNetworkRigidbody : DistributedAuthorityBehaviour<CompleteRigidbodyPose>
+    public class DistributedNetworkRigidbody : DistributedNetworkObject<CompleteRigidbodyPose>
     {
         [SerializeField] private bool _automaticallyDeclineOnAsleep;
         [SerializeField] private UnityEvent _onAsleep;

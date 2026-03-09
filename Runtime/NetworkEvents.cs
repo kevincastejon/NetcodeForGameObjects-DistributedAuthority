@@ -19,11 +19,11 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         public class ValueEvents<T2>
         {
             [Tooltip("Fires when the value is changed from either local or remote side.")]
-            [SerializeField] private UnityEvent<T2> _onValueChanged;
+            [SerializeField] private UnityEvent<T2> _onValueChanged = new();
             [Tooltip("Fires when the value is changed from local side.")]
-            [SerializeField] private UnityEvent<T2> _onLocalValueChanged;
+            [SerializeField] private UnityEvent<T2> _onLocalValueChanged = new();
             [Tooltip("Fires when the value is changed from remote side.")]
-            [SerializeField] private UnityEvent<T2> _onRemoteValueChanged;
+            [SerializeField] private UnityEvent<T2> _onRemoteValueChanged = new();
             /// <summary>
             /// Fires when the value is changed from either local or remote side.
             /// </summary>
@@ -38,11 +38,11 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
             public UnityEvent<T2> OnRemoteValueChanged { get => _onRemoteValueChanged; }
         }
         [Tooltip("A set of events related to a network value change, organized into a local/remote oriented way. These events will fire regardless of the server/client state.")]
-        [SerializeField] private ValueEvents<T> _crossSideEvents;
+        [SerializeField] private ValueEvents<T> _crossSideEvents = new();
         [Tooltip("A set of events related to a network value change, organized into a local/remote oriented way. These events will fire only server-side.")]
-        [SerializeField] private ValueEvents<T> _serverSideEvents;
+        [SerializeField] private ValueEvents<T> _serverSideEvents = new();
         [Tooltip("A set of events related to a network value change, organized into a local/remote oriented way. These events will fire only client-side.")]
-        [SerializeField] private ValueEvents<T> _clientSideEvents;
+        [SerializeField] private ValueEvents<T> _clientSideEvents = new();
         /// <summary>
         /// A set of events related to a network value change, organized into a local/remote oriented way. These events will fire regardless of the server/client state.
         /// </summary>
@@ -71,11 +71,11 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         public class TriggerEvents
         {
             [Tooltip("Fires when triggered is changed from either local or remote side.")]
-            [SerializeField] private UnityEvent _onTrigger;
+            [SerializeField] private UnityEvent _onTrigger = new();
             [Tooltip("Fires when triggered is changed from local side.")]
-            [SerializeField] private UnityEvent _onLocalTrigger;
+            [SerializeField] private UnityEvent _onLocalTrigger = new();
             [Tooltip("Fires when triggered is changed from remote side.")]
-            [SerializeField] private UnityEvent _onRemoteTrigger;
+            [SerializeField] private UnityEvent _onRemoteTrigger = new();
             /// <summary>
             /// Fires when triggered from either local or remote side.
             /// </summary>
@@ -90,11 +90,11 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
             public UnityEvent OnRemoteTrigger { get => _onRemoteTrigger; }
         }
         [Tooltip("A set of events related to a network trigger, organized into a local/remote oriented way. These events will fire regardless of the server/client state.")]
-        [SerializeField] private TriggerEvents _crossSideEvents;
+        [SerializeField] private TriggerEvents _crossSideEvents = new();
         [Tooltip("A set of events related to a network trigger, organized into a local/remote oriented way. These events will fire only server-side.")]
-        [SerializeField] private TriggerEvents _serverSideEvents;
+        [SerializeField] private TriggerEvents _serverSideEvents = new();
         [Tooltip("A set of events related to a network trigger, organized into a local/remote oriented way. These events will fire only client-side.")]
-        [SerializeField] private TriggerEvents _clientSideEvents;
+        [SerializeField] private TriggerEvents _clientSideEvents = new();
         /// <summary>
         /// A set of events related to a network trigger, organized into a local/remote oriented way. These events will fire regardless of the server/client state.
         /// </summary>

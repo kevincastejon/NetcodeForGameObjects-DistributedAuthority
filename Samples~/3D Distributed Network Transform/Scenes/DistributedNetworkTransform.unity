@@ -1238,6 +1238,12 @@ MonoBehaviour:
     _onStateChanged:
       m_PersistentCalls:
         m_Calls: []
+    _onEnterNone:
+      m_PersistentCalls:
+        m_Calls: []
+    _onExitNone:
+      m_PersistentCalls:
+        m_Calls: []
     _onEnterAuthority:
       m_PersistentCalls:
         m_Calls:
@@ -1308,12 +1314,6 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     _onExitDeclining:
-      m_PersistentCalls:
-        m_Calls: []
-    _onEnterNone:
-      m_PersistentCalls:
-        m_Calls: []
-    _onExitNone:
       m_PersistentCalls:
         m_Calls: []
   _ownershipEvents:

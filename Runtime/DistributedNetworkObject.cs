@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.Events;
 namespace Caskev.NetcodeForGameObjects.DistributedAuthority
 {
-    public class DistributedAuthorityBehaviour<T> : NetworkBehaviour
+    [DisallowMultipleComponent]
+    [RequireComponent(typeof(NetworkObject))]
+    public class DistributedNetworkObject<T> : NetworkBehaviour
     {
         /// <summary>
         /// A set of debug parameters
@@ -356,7 +358,14 @@ namespace Caskev.NetcodeForGameObjects.DistributedAuthority
         /// Is the ownership of the object locked on the current owner
         /// </summary>
         public bool IsOwnershipLocked { get => _isOwnershipLocked; }
-
+        private void Awake()
+        {
+            if (GetComponent<NetworkObject>() == null)
+            {
+                Debug.LogError($"[DistributedNetworkObject] [Awake] No NetworkObject found on the GameObject {gameObject.name}", gameObject);
+                enabled = false;
+            }
+        }
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();

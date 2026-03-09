@@ -479,6 +479,12 @@ MonoBehaviour:
     _onStateChanged:
       m_PersistentCalls:
         m_Calls: []
+    _onEnterNone:
+      m_PersistentCalls:
+        m_Calls: []
+    _onExitNone:
+      m_PersistentCalls:
+        m_Calls: []
     _onEnterAuthority:
       m_PersistentCalls:
         m_Calls: []
@@ -501,12 +507,6 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     _onExitDeclining:
-      m_PersistentCalls:
-        m_Calls: []
-    _onEnterNone:
-      m_PersistentCalls:
-        m_Calls: []
-    _onExitNone:
       m_PersistentCalls:
         m_Calls: []
   _ownershipEvents:
@@ -1798,6 +1798,12 @@ MonoBehaviour:
     _onStateChanged:
       m_PersistentCalls:
         m_Calls: []
+    _onEnterNone:
+      m_PersistentCalls:
+        m_Calls: []
+    _onExitNone:
+      m_PersistentCalls:
+        m_Calls: []
     _onEnterAuthority:
       m_PersistentCalls:
         m_Calls: []
@@ -1820,12 +1826,6 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     _onExitDeclining:
-      m_PersistentCalls:
-        m_Calls: []
-    _onEnterNone:
-      m_PersistentCalls:
-        m_Calls: []
-    _onExitNone:
       m_PersistentCalls:
         m_Calls: []
   _ownershipEvents:
@@ -2444,6 +2444,12 @@ MonoBehaviour:
     _onStateChanged:
       m_PersistentCalls:
         m_Calls: []
+    _onEnterNone:
+      m_PersistentCalls:
+        m_Calls: []
+    _onExitNone:
+      m_PersistentCalls:
+        m_Calls: []
     _onEnterAuthority:
       m_PersistentCalls:
         m_Calls: []
@@ -2466,12 +2472,6 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     _onExitDeclining:
-      m_PersistentCalls:
-        m_Calls: []
-    _onEnterNone:
-      m_PersistentCalls:
-        m_Calls: []
-    _onExitNone:
       m_PersistentCalls:
         m_Calls: []
   _ownershipEvents:
@@ -3239,7 +3239,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -403.50003, y: 71}
+  m_AnchoredPosition: {x: -403.49997, y: 71}
   m_SizeDelta: {x: 475, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &503056808
@@ -5132,6 +5132,12 @@ MonoBehaviour:
     _onStateChanged:
       m_PersistentCalls:
         m_Calls: []
+    _onEnterNone:
+      m_PersistentCalls:
+        m_Calls: []
+    _onExitNone:
+      m_PersistentCalls:
+        m_Calls: []
     _onEnterAuthority:
       m_PersistentCalls:
         m_Calls: []
@@ -5154,12 +5160,6 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     _onExitDeclining:
-      m_PersistentCalls:
-        m_Calls: []
-    _onEnterNone:
-      m_PersistentCalls:
-        m_Calls: []
-    _onExitNone:
       m_PersistentCalls:
         m_Calls: []
   _ownershipEvents:
@@ -5776,7 +5776,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1001502547}
   m_Direction: 2
   m_Value: 0.00000009082613
-  m_Size: 0.29000032
+  m_Size: 0.58
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5838,6 +5838,12 @@ MonoBehaviour:
     _onStateChanged:
       m_PersistentCalls:
         m_Calls: []
+    _onEnterNone:
+      m_PersistentCalls:
+        m_Calls: []
+    _onExitNone:
+      m_PersistentCalls:
+        m_Calls: []
     _onEnterAuthority:
       m_PersistentCalls:
         m_Calls: []
@@ -5860,12 +5866,6 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     _onExitDeclining:
-      m_PersistentCalls:
-        m_Calls: []
-    _onEnterNone:
-      m_PersistentCalls:
-        m_Calls: []
-    _onExitNone:
       m_PersistentCalls:
         m_Calls: []
   _ownershipEvents:
@@ -6673,7 +6673,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1681776559}
   m_Direction: 0
   m_Value: 0.9999999
-  m_Size: 0.15052657
+  m_Size: 0.30105263
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6735,6 +6735,12 @@ MonoBehaviour:
     _onStateChanged:
       m_PersistentCalls:
         m_Calls: []
+    _onEnterNone:
+      m_PersistentCalls:
+        m_Calls: []
+    _onExitNone:
+      m_PersistentCalls:
+        m_Calls: []
     _onEnterAuthority:
       m_PersistentCalls:
         m_Calls: []
@@ -6757,12 +6763,6 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     _onExitDeclining:
-      m_PersistentCalls:
-        m_Calls: []
-    _onEnterNone:
-      m_PersistentCalls:
-        m_Calls: []
-    _onExitNone:
       m_PersistentCalls:
         m_Calls: []
   _ownershipEvents:
@@ -7534,6 +7534,12 @@ MonoBehaviour:
     _onStateChanged:
       m_PersistentCalls:
         m_Calls: []
+    _onEnterNone:
+      m_PersistentCalls:
+        m_Calls: []
+    _onExitNone:
+      m_PersistentCalls:
+        m_Calls: []
     _onEnterAuthority:
       m_PersistentCalls:
         m_Calls: []
@@ -7556,12 +7562,6 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     _onExitDeclining:
-      m_PersistentCalls:
-        m_Calls: []
-    _onEnterNone:
-      m_PersistentCalls:
-        m_Calls: []
-    _onExitNone:
       m_PersistentCalls:
         m_Calls: []
   _ownershipEvents:
@@ -10271,6 +10271,12 @@ MonoBehaviour:
     _onStateChanged:
       m_PersistentCalls:
         m_Calls: []
+    _onEnterNone:
+      m_PersistentCalls:
+        m_Calls: []
+    _onExitNone:
+      m_PersistentCalls:
+        m_Calls: []
     _onEnterAuthority:
       m_PersistentCalls:
         m_Calls: []
@@ -10293,12 +10299,6 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     _onExitDeclining:
-      m_PersistentCalls:
-        m_Calls: []
-    _onEnterNone:
-      m_PersistentCalls:
-        m_Calls: []
-    _onExitNone:
       m_PersistentCalls:
         m_Calls: []
   _ownershipEvents:
